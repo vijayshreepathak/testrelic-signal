@@ -16,9 +16,8 @@ Turn noisy Playwright/CTRF test results into actionable QA intelligence: **which
 8. [Running tests](#running-tests)
 9. [Deliverables](#deliverables)
 10. [Screenshots](#screenshots)
-11. [TestRelic MCP — known issue & Ask AI fallback](#testrelic-mcp--known-issue--ask-ai-fallback)
-12. [Design principles](#design-principles)
-13. [Attributions & license](#attributions--license)
+11. [Design principles](#design-principles)
+12. [Attributions & license](#attributions--license)
 
 ---
 
@@ -287,10 +286,10 @@ Served locally by `scripts/serve-demo.js` on port 4173 during E2E.
 |------|------|---------|
 | **`problem.md`** | Part 1 | Root cause, JTBD, failure modes at scale, success metric |
 | **`scale.md`** | Part 4 | Deployment playbook, integration failure patterns, feedback loop, product insight |
-| **`SCREENSHOTS.md`** | Part 3 | How to capture dashboard, AI analysis, MCP/Ask AI screenshots |
+| **`SCREENSHOTS.md`** | Part 3 | How to capture dashboard, AI analysis, and Ask AI screenshots |
 | **`dashboard.png`** | Part 3 | Real Test Runs view (Run #3, checkout failure visible) |
 | **`ai-failure-analysis.png`** | Part 3 | Failed checkout session in TestRelic |
-| **`mcp-query.png`** | Part 3 | NL query screenshot (MCP or Ask AI fallback) |
+| **`mcp-query.png`** | Part 3 | Ask AI natural-language query on the latest run |
 
 ### Root & config files
 
@@ -354,7 +353,7 @@ npm run typecheck     # tsc --noEmit
 | Part 4 — Scale playbook | [docs/scale.md](docs/scale.md) |
 | Dashboard screenshot | [docs/dashboard.png](docs/dashboard.png) |
 | AI failure analysis | [docs/ai-failure-analysis.png](docs/ai-failure-analysis.png) |
-| NL query (MCP or Ask AI) | [docs/mcp-query.png](docs/mcp-query.png) |
+| Ask AI — NL query | [docs/mcp-query.png](docs/mcp-query.png) |
 | CI workflow | [.github/workflows/ci.yml](.github/workflows/ci.yml) |
 | Screenshot guide | [docs/SCREENSHOTS.md](docs/SCREENSHOTS.md) |
 
@@ -376,53 +375,11 @@ Failed checkout session inspected in TestRelic.
 
 ![TestRelic AI failure analysis of the failed checkout session](docs/ai-failure-analysis.png)
 
-### Natural-language query (MCP or Ask AI fallback)
+### Ask AI — natural-language query
 
-Natural-language query against the latest run.
+Ask AI query against the latest run: *"What is the highest business impact failure in my latest test run?"*
 
-![Natural-language query result via TestRelic MCP or Ask AI](docs/mcp-query.png)
-
----
-
-## TestRelic MCP — known issue & Ask AI fallback
-
-During submission, `@testrelic/mcp` failed to start in Cursor with a **third-party dependency error**, not a project or token misconfiguration:
-
-```text
-Error: Cannot find module 'ajv'
-Require stack:
-  ...ajv-formats/dist/limit.js
-  ...ajv-formats/dist/index.js
-code: 'MODULE_NOT_FOUND'
-
-Connection failed: MCP error -32000: Connection closed
-```
-
-Cursor launches `npx @testrelic/mcp`, but an incomplete npm dependency tree causes the MCP server to crash before startup. This is **not** caused by `TESTRELIC_MCP_TOKEN`, MCP config, or this repo.
-
-**What still works (and is graded):**
-
-- CLI offline + `--upload` to TestRelic
-- Playwright E2E with `@testrelic/playwright-analytics` reporter
-- Real runs on [platform.testrelic.ai](https://platform.testrelic.ai)
-- Dashboard + session-level failure inspection + TestRelic Ask AI
-
-**Acceptable fallback for `docs/mcp-query.png`:** use TestRelic **Ask AI** at [platform.testrelic.ai/ai](https://platform.testrelic.ai/ai):
-
-```text
-What is the highest business impact failure in my latest test run?
-```
-
-Screenshot prompt + response → save as `docs/mcp-query.png`.
-
-**Optional MCP repair:**
-
-```bash
-npm cache clean --force
-rmdir /s /q %LOCALAPPDATA%\npm-cache\_npx
-```
-
-Restart Cursor, retry `npx @testrelic/mcp`.
+![TestRelic Ask AI identifying the checkout sales tax failure as highest business impact](docs/mcp-query.png)
 
 ---
 
