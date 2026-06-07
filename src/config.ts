@@ -49,6 +49,10 @@ export function loadDotenv(path = resolve(process.cwd(), '.env')): void {
       (value.startsWith("'") && value.endsWith("'"))
     ) {
       value = value.slice(1, -1);
+    } else {
+      // Strip trailing inline comments on unquoted values: KEY=val # note
+      const hashIdx = value.indexOf(' #');
+      if (hashIdx >= 0) value = value.slice(0, hashIdx).trim();
     }
     process.env[key] = value;
   }

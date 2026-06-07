@@ -15,9 +15,10 @@ Turn noisy Playwright/CTRF test results into actionable QA intelligence: **which
 7. [CLI usage](#cli-usage)
 8. [Running tests](#running-tests)
 9. [Deliverables](#deliverables)
-10. [TestRelic MCP — known issue & Ask AI fallback](#testrelic-mcp--known-issue--ask-ai-fallback)
-11. [Design principles](#design-principles)
-12. [Attributions & license](#attributions--license)
+10. [Screenshots](#screenshots)
+11. [TestRelic MCP — known issue & Ask AI fallback](#testrelic-mcp--known-issue--ask-ai-fallback)
+12. [Design principles](#design-principles)
+13. [Attributions & license](#attributions--license)
 
 ---
 
@@ -68,33 +69,33 @@ High-level view of how the repo fits together: offline CLI core, optional TestRe
 
 ```mermaid
 flowchart TB
-  subgraph inputs [Inputs]
-    CTRF[CTRF JSON file]
-    PW[Playwright JSON report]
-    HIST[History dir — prior runs]
+  subgraph inputs ["Inputs"]
+    CTRF["CTRF JSON file"]
+    PW["Playwright JSON report"]
+    HIST["History dir — prior runs"]
   end
 
-  subgraph cli [testrelic-signal CLI — always works offline]
-    PARSER[parser.ts]
-    SCORER[scorer.ts]
-    FLAKE[flakiness.ts]
-    SUM[summarizer.ts]
-    RPT[report.ts]
-    UP[uploader.ts — optional]
+  subgraph cli ["testrelic-signal CLI — always works offline"]
+    PARSER["parser.ts"]
+    SCORER["scorer.ts"]
+    FLAKE["flakiness.ts"]
+    SUM["summarizer.ts"]
+    RPT["report.ts"]
+    UP["uploader.ts — optional"]
     PARSER --> SCORER --> FLAKE --> SUM --> RPT
     RPT --> UP
   end
 
-  subgraph e2e [Playwright E2E layer]
-    DEMO[demo-app/]
-    SPECS[tests/e2e/*.spec.ts]
+  subgraph e2e ["Playwright E2E layer"]
+    DEMO["demo-app/"]
+    SPECS["tests/e2e/*.spec.ts"]
     DEMO --> SPECS
   end
 
-  subgraph testrelic [TestRelic cloud — enhancement only]
-    REP[@testrelic/playwright-analytics reporter]
-    DASH[platform.testrelic.ai dashboard]
-    AI[Ask AI / session inspection]
+  subgraph testrelic ["TestRelic cloud — enhancement only"]
+    REP["@testrelic/playwright-analytics reporter"]
+    DASH["platform.testrelic.ai dashboard"]
+    AI["Ask AI / session inspection"]
     REP --> DASH --> AI
   end
 
@@ -106,7 +107,7 @@ flowchart TB
   PW --> PARSER
   UP --> DASH
   REP --> DASH
-  RPT --> TERM[Terminal / JSON output]
+  RPT --> TERM["Terminal / JSON output"]
 ```
 
 ### Layer responsibilities
@@ -176,22 +177,22 @@ Two **documented** upload paths; neither is required for core CLI value.
 
 ```mermaid
 flowchart LR
-  subgraph path1 [Path 1 — Playwright test runs]
-    A[npm run test:e2e] --> B[playwright.config.ts reporter]
+  subgraph path1 ["Path 1 — Playwright test runs"]
+    A["npm run test:e2e"] --> B["playwright.config.ts reporter"]
     B --> C["@testrelic/playwright-analytics"]
-    C --> D[Streaming + batch upload]
-    D --> E[Dashboard + AI session view]
+    C --> D["Streaming + batch upload"]
+    D --> E["Dashboard + AI session view"]
   end
 
-  subgraph path2 [Path 2 — CLI own report]
-    F[analyze --upload] --> G[uploader.ts]
+  subgraph path2 ["Path 2 — CLI own report"]
+    F["analyze --upload"] --> G["uploader.ts"]
     G --> H["POST /sdk/auth/token"]
     H --> I["POST /runs"]
     I --> E
   end
 
-  subgraph auth [Auth — mirrored from SDK]
-    KEY[TESTRELIC_API_KEY in .env]
+  subgraph auth ["Auth — mirrored from SDK"]
+    KEY["TESTRELIC_API_KEY in .env"]
     KEY --> H
     KEY --> C
   end
@@ -356,6 +357,30 @@ npm run typecheck     # tsc --noEmit
 | NL query (MCP or Ask AI) | [docs/mcp-query.png](docs/mcp-query.png) |
 | CI workflow | [.github/workflows/ci.yml](.github/workflows/ci.yml) |
 | Screenshot guide | [docs/SCREENSHOTS.md](docs/SCREENSHOTS.md) |
+
+---
+
+## Screenshots
+
+These render inline on GitHub as long as the PNG files exist at the referenced `docs/` paths. (Plain `[text](path)` links only navigate — `![alt](path)` embeds are what actually display the image.)
+
+### Dashboard — Test Runs view
+
+Real Test Runs view with the checkout failure visible.
+
+![TestRelic dashboard showing the Test Runs view with the checkout failure](docs/dashboard.png)
+
+### AI failure analysis
+
+Failed checkout session inspected in TestRelic.
+
+![TestRelic AI failure analysis of the failed checkout session](docs/ai-failure-analysis.png)
+
+### Natural-language query (MCP or Ask AI fallback)
+
+Natural-language query against the latest run.
+
+![Natural-language query result via TestRelic MCP or Ask AI](docs/mcp-query.png)
 
 ---
 

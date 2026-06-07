@@ -8,6 +8,9 @@
     "url": "https://github.com/vijayshreepathak/testrelic-signal.git"
   },
   "homepage": "https://github.com/vijayshreepathak/testrelic-signal#readme",
+  "bugs": {
+    "url": "https://github.com/vijayshreepathak/testrelic-signal/issues"
+  },
   "type": "commonjs",
   "bin": {
     "testrelic-signal": "dist/cli.js"
