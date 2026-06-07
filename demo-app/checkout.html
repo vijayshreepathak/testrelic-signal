@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Checkout — Demo SaaS</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="checkout">
+  <div class="card">
+    <h1>Checkout</h1>
+    <p>Pro plan — monthly</p>
+    <div class="totals">
+      <span>Subtotal: $<span id="subtotal">—</span></span>
+      <span>Tax (8%): $<span id="tax">—</span></span>
+      <strong>Order total: $<span id="order-total" data-testid="order-total">—</span></strong>
+    </div>
+    <div id="shipping-banner" class="banner" data-testid="shipping-banner"></div>
+    <button type="button" id="pay-button">Pay now</button>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

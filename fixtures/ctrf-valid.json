@@ -1,0 +1,100 @@
+{
+  "reportFormat": "CTRF",
+  "specVersion": "0.0.0",
+  "results": {
+    "tool": { "name": "playwright" },
+    "summary": {
+      "tests": 8,
+      "passed": 4,
+      "failed": 3,
+      "flaky": 1,
+      "pending": 0,
+      "skipped": 0,
+      "other": 0,
+      "start": 1771200000000,
+      "stop": 1771200004200
+    },
+    "tests": [
+      {
+        "name": "user can log in with valid credentials",
+        "suite": "auth",
+        "filePath": "tests/e2e/auth.spec.ts",
+        "tags": ["@critical", "@auth"],
+        "status": "passed",
+        "duration": 612,
+        "retries": 0
+      },
+      {
+        "name": "login form rejects an incorrect password",
+        "suite": "auth",
+        "filePath": "tests/e2e/auth.spec.ts",
+        "tags": ["@critical", "@auth"],
+        "status": "passed",
+        "duration": 540,
+        "retries": 0
+      },
+      {
+        "name": "new user can create an account",
+        "suite": "signup",
+        "filePath": "tests/e2e/signup.spec.ts",
+        "tags": ["@critical", "@signup"],
+        "status": "passed",
+        "duration": 880,
+        "retries": 0
+      },
+      {
+        "name": "main navigation links route correctly",
+        "suite": "navigation",
+        "filePath": "tests/e2e/navigation.spec.ts",
+        "tags": ["@navigation"],
+        "status": "passed",
+        "duration": 410,
+        "retries": 0
+      },
+      {
+        "name": "checkout applies 8% sales tax to the order total",
+        "suite": "checkout",
+        "filePath": "tests/e2e/checkout.spec.ts",
+        "tags": ["@critical", "@checkout", "@payment"],
+        "status": "failed",
+        "duration": 905,
+        "retries": 0,
+        "message": "Error: expect(received).toBe(expected)\n\nExpected: 108\nReceived: 100\n    at tests/e2e/checkout.spec.ts:42:30",
+        "trace": "Error: expect(received).toBe(expected)\n    at tests/e2e/checkout.spec.ts:42:30\n    at runMicrotasks (<anonymous>)"
+      },
+      {
+        "name": "search results highlight the query term",
+        "suite": "search",
+        "filePath": "tests/e2e/search.spec.ts",
+        "tags": ["@search"],
+        "status": "failed",
+        "duration": 5021,
+        "retries": 1,
+        "message": "Error: locator.click: Timeout 5000ms exceeded waiting for element\n    at tests/e2e/search.spec.ts:21:18",
+        "trace": "Error: locator.click: Timeout 5000ms exceeded\n    at tests/e2e/search.spec.ts:21:18"
+      },
+      {
+        "name": "footer shows the current copyright year",
+        "suite": "footer",
+        "filePath": "tests/e2e/footer.spec.ts",
+        "tags": ["@cosmetic", "@copy"],
+        "status": "failed",
+        "duration": 120,
+        "retries": 0,
+        "message": "Error: expect(received).toContain(expected)\n\nExpected substring: \"2026\"\nReceived string: \"© 2021 Demo Co\"\n    at tests/e2e/footer.spec.ts:10:24",
+        "trace": "Error: expect(received).toContain(expected)\n    at tests/e2e/footer.spec.ts:10:24"
+      },
+      {
+        "name": "checkout shows the free shipping banner over $50",
+        "suite": "checkout",
+        "filePath": "tests/e2e/checkout.spec.ts",
+        "tags": ["@checkout"],
+        "status": "flaky",
+        "duration": 1320,
+        "retries": 2,
+        "message": "Error: expect(locator).toBeVisible() failed on first attempt, passed on retry",
+        "trace": "Error: expect(locator).toBeVisible()\n    at tests/e2e/checkout.spec.ts:58:40"
+      }
+    ]
+  }
+}

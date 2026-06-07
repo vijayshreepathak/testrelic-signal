@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env
+.testrelic/
+test-results/
+playwright-report/
+blob-report/
+*.log
+.DS_Store
+
+# TestRelic test artifacts
+test-results/artifacts/

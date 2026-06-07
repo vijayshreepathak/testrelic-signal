@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign up — Demo SaaS</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="signup">
+  <div class="card">
+    <h1>Create account</h1>
+    <form id="signup-form">
+      <label for="name">Full name</label>
+      <input id="name" name="name" required />
+      <label for="signup-email">Work email</label>
+      <input id="signup-email" name="email" type="email" required />
+      <label for="signup-password">Password</label>
+      <input id="signup-password" name="password" type="password" minlength="8" required />
+      <button type="submit">Create account</button>
+    </form>
+    <p id="signup-success"></p>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "reportFormat": "CTRF",
+  "results": {
+    "tool": { "name": "playwright" },
+    "summary": {
+      "tests": 4
+    },
+    "tests": [
+      {
+        "name": "checkout charges the saved card",
+        "filePath": "tests/e2e/checkout.spec.ts",
+        "status": "failed",
+        "message": null,
+        "trace": null
+      },
+      {
+        "name": "account settings save profile changes",
+        "status": "failed"
+      },
+      {
+        "suite": "navigation",
+        "status": "passed"
+      },
+      {
+        "name": "search box renders",
+        "status": "passed",
+        "duration": null,
+        "retries": null,
+        "tags": null
+      }
+    ]
+  }
+}

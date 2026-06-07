@@ -1,0 +1,14 @@
+{
+  "reportFormat": "CTRF",
+  "results": {
+    "tool": { "name": "playwright" },
+    "summary": { "tests": 5, "passed": 4, "failed": 1, "flaky": 0, "skipped": 0, "start": 1770768000000, "stop": 1770768004100 },
+    "tests": [
+      { "name": "checkout applies 8% sales tax to the order total", "suite": "checkout", "filePath": "tests/e2e/checkout.spec.ts", "tags": ["@critical", "@checkout"], "status": "failed", "duration": 900, "retries": 0, "message": "Expected: 108\nReceived: 100" },
+      { "name": "search results highlight the query term", "suite": "search", "filePath": "tests/e2e/search.spec.ts", "tags": ["@search"], "status": "passed", "duration": 420, "retries": 0 },
+      { "name": "user can log in with valid credentials", "suite": "auth", "filePath": "tests/e2e/auth.spec.ts", "tags": ["@critical", "@auth"], "status": "passed", "duration": 605, "retries": 0 },
+      { "name": "new user can create an account", "suite": "signup", "filePath": "tests/e2e/signup.spec.ts", "tags": ["@critical", "@signup"], "status": "passed", "duration": 860, "retries": 0 },
+      { "name": "checkout shows the free shipping banner over $50", "suite": "checkout", "filePath": "tests/e2e/checkout.spec.ts", "tags": ["@checkout"], "status": "passed", "duration": 1050, "retries": 0 }
+    ]
+  }
+}

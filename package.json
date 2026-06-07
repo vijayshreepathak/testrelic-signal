@@ -1,0 +1,44 @@
+{
+  "name": "testrelic-signal",
+  "version": "1.0.0",
+  "description": "Turn noisy Playwright/CTRF test results into actionable QA intelligence: which failures are real bugs, which are flaky noise, and what to do next.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vijayshreepathak/testrelic-signal.git"
+  },
+  "homepage": "https://github.com/vijayshreepathak/testrelic-signal#readme",
+  "type": "commonjs",
+  "bin": {
+    "testrelic-signal": "dist/cli.js"
+  },
+  "main": "dist/cli.js",
+  "files": [
+    "dist",
+    "fixtures"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "analyze": "tsx src/cli.ts analyze fixtures/ctrf-valid.json --history fixtures/history",
+    "build": "tsc -p tsconfig.json",
+    "start": "tsx src/cli.ts",
+    "test": "playwright test --project=cli",
+    "test:e2e": "playwright test --project=e2e",
+    "test:all": "playwright test",
+    "demo": "tsx src/cli.ts analyze fixtures/ctrf-valid.json --history fixtures/history",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "picocolors": "^1.1.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "@testrelic/playwright-analytics": "^2.8.0",
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}

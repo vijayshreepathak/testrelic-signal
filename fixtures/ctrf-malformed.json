@@ -1,0 +1,8 @@
+{
+  "reportFormat": "CTRF",
+  "results": {
+    "tool": { "name": "playwright" },
+    "tests": [
+      { "name": "this file is intentionally broken JSON",, "status": "failed" }
+    ]
+  }
